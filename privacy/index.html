@@ -1,55 +1,637 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Privacy Policy - [Your App Name]</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy - Now Launcher</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  
+  <!-- Google Icon Font (for Bolt + card icons) -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
-      line-height: 1.6;
-      color: #333;
-      max-width: 800px;
+    :root {
+      --bg: #f5f5f6;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border-subtle: #e5e7eb;
+      --content-width: 1120px;
     }
-    h1, h2 {
-      color: #222;
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+      flex: 1;
+    }
+
+    /* Header / Nav */
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      padding-bottom: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      font-size: 22px;
+    }
+
+    .brand-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #111827, #111827 35%, #000 80%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-logo::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border-radius: inherit;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-top-color: transparent;
+      border-right-color: transparent;
+      transform: rotate(-30deg);
+    }
+    
+       .logo-icon {
+      font-family: "Material Symbols Rounded";
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 100,
+        'GRAD' 0,
+        'opsz' 48;
+      font-size: 36px;
+      color: #111;
+      border-radius: 50%;
+      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48;
+    }
+
+    .brand span {
+      font-weight: 400;
+    }
+
+    .nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      font-size: 14px;
+      color: #4b5563;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    .nav a:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: #111827;
+    }
+
+    .nav a.is-active {
+      font-weight: 500;
+      color: #111827;
+    }
+
+    .nav a.is-active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: #111827;
+    }
+
+    .header-cta {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .play-badge-link {
+      display: inline-block;
+    }
+
+    .play-badge {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 56px;
+      padding: 40px 0 0;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
+      }
+    }
+
+    .hero-kicker {
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.05;
+      margin: 0 0 14px;
+    }
+
+    .hero-title span {
+      display: inline-block;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .hero-primary {
+      padding: 11px 20px;
+      border-radius: 999px;
+      border: none;
+      background: #111827;
+      color: #f9fafb;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .hero-primary:hover {
+      opacity: 0.92;
+    }
+
+    /* Policy content */
+
+    .policy-wrapper {
+      margin-top: 40px;
+      padding: 32px 28px 34px;
+    }
+
+    .policy-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .policy-meta strong {
+      color: #4b5563;
+    }
+
+    .policy-heading-main {
+      font-size: 20px;
+      margin: 0 0 8px;
+    }
+
+    .policy-lead {
+      margin: 0 0 18px;
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 650px;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin-top: 22px;
+      margin-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 14px;
+      margin-top: 16px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 4px 0 10px;
+    }
+
+    ul {
+      margin: 4px 0 12px 20px;
+      padding: 0;
+      font-size: 14px;
+    }
+
+    li {
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+
+    .section-divider {
+      margin: 18px 0 14px;
+      border: none;
+      border-top: 1px solid #f3f4f6;
+    }
+
+    .contact-block {
+      margin-top: 6px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      font-size: 13px;
+      color: #4b5563;
+      max-width: 360px;
+    }
+
+    .contact-block a {
+      color: #111827;
+      text-decoration: none;
+      border-bottom: 1px solid #d1d5db;
+    }
+
+    .contact-block a:hover {
+      border-bottom-color: #111827;
+    }
+
+    /* Footer */
+
+    .site-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 16px 20px 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 720px) {
+      .site-header {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .policy-wrapper {
+        padding: 22px 18px 26px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="page">
+    <!-- Top navigation -->
+    <header class="site-header">
+      <div class="brand">
+		<span class="logo-icon">
+          <span class="material-symbols-outlined">bolt</span>
+        </span>
+        <span>Now Launcher</span>
+      </div>
 
-  <h1>Privacy Policy</h1>
-  <p><strong>Effective Date:</strong> 2 August 2025</p>
-  <p><strong>App Name:</strong> Now Launcher</p>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/privacy" class="is-active">Privacy</a>
+        <a href="/terms">Terms of Service</a>
+      </nav>
 
-  <p><strong>Now Launcher</strong> ("we", "our", or "us") respects your privacy. This Privacy Policy outlines how we handle information when you use our Android application ("App").</p>
+      <div class="header-cta">
+        <a
+          href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
+          class="play-badge-link"
+        >
+          <img
+            src="/assets/play_badge.svg"
+            alt="Get it on Google Play"
+            class="play-badge"
+          />
+        </a>
+      </div>
+    </header>
 
-  <h2>1. Information We Collect</h2>
-  <p>We do <strong>not</strong> collect, store, or process any personally identifiable information from users of our App.</p>
-  <p>Our App does not require users to create accounts, input personal details, or grant access to sensitive permissions such as contacts, camera, or location.</p>
+    <!-- Hero section -->
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="hero-kicker">Now launcher · Privacy</div>
+        <h1 class="hero-title">
+          <span>Privacy Policy</span><br />
+        </h1>
+      </div>
+    </section>
 
-  <h2>2. External Links</h2>
-  <p>The App may contain links to external websites or services. Please be aware that we are not responsible for the privacy practices of these third-party websites. We encourage you to read their privacy policies before interacting with them.</p>
+    <!-- Policy content -->
+    <section id="policy" class="policy-wrapper">
+      <div class="policy-meta">
+        <strong>Last updated:</strong> 23 November 2025
+      </div>
 
-  <h2>3. Data Storage and Tracking</h2>
-  <ul>
-    <li>We do <strong>not</strong> store user data on our servers.</li>
-    <li>We do <strong>not</strong> use third-party analytics or advertising services.</li>
-    <li>No tracking technologies (like cookies or device fingerprinting) are used in the App.</li>
-  </ul>
+      <h1 class="policy-heading-main">Privacy Policy for Now Launcher</h1>
+      <p class="policy-lead">
+        Now Launcher (“we”, “our”, “the App”) is an Android launcher designed to personalise and
+        enhance your device experience. This Privacy Policy explains what information we access,
+        how it is used, and your choices. We take privacy seriously. We only request the
+        permissions required to provide functionality, and we do <strong>not</strong> sell
+        personal data.
+      </p>
 
-  <h2>4. Children's Privacy</h2>
-  <p>Our App is not directed toward children under 13. We do not knowingly collect information from anyone under the age of 13.</p>
+      <hr class="section-divider" />
 
-  <h2>5. Changes to This Policy</h2>
-  <p>We may update this Privacy Policy from time to time. Any changes will be reflected in this document and updated with a new effective date.</p>
+      <h2>1. Information We Access</h2>
+      <p>
+        The App may request certain Android permissions to operate. All data accessed through
+        these permissions is processed <strong>on your device</strong> and is
+        <strong>not stored on our servers</strong>.
+      </p>
 
-  <h2>6. Contact Us</h2>
-  <p>If you have any questions about this Privacy Policy, feel free to contact us at:</p>
-  <p><strong>Email:</strong> hello@tigerstorm.dev<br>
-     <strong>Company:</strong> TIGERSTORM LIMITED</p>
+      <h3>1.1 Health Permissions (Health Connect)</h3>
+      <p>
+        Used to display activity and health-related information if you enable these features.
+        We do not upload or store any health data.
+      </p>
 
+      <h3>1.2 Location</h3>
+      <p>
+        Used to provide features such as weather or contextual information. Your location is not
+        stored or shared by us.
+      </p>
+
+      <h3>1.3 Contacts</h3>
+      <p>
+        Used to display your contacts or provide shortcuts within the launcher.
+        The App does not upload or share your contact data.
+      </p>
+
+      <h3>1.4 Calendar</h3>
+      <p>
+        Used to show upcoming events when enabled. Calendar information remains on your device.
+      </p>
+
+      <h3>1.5 Notification Access &amp; Media Permissions</h3>
+      <p>
+        Used to display notifications, media controls, or currently playing audio.
+        Notification content is processed locally and never transmitted outside your device by us.
+      </p>
+
+      <h3>1.6 Internet Access</h3>
+      <p>The App may use the internet to:</p>
+      <ul>
+        <li>Retrieve content requested by you</li>
+        <li>Update widgets or informational sections</li>
+        <li>Perform searches that you initiate</li>
+      </ul>
+      <p>
+        We do not track or collect your browsing history. We do not intercept or store your search
+        queries.
+      </p>
+
+      <h3>1.7 External Links</h3>
+      <p>
+        When you request a web search or open a link, the App forwards the request to your selected
+        browser or service. No browsing data is collected by us during this process.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>2. Authentication (Optional)</h2>
+      <p>
+        If you choose to sign in, a secure third-party authentication provider may be used.
+        This may provide us with:
+      </p>
+      <ul>
+        <li>Your name</li>
+        <li>Your email address</li>
+        <li>A unique identifier</li>
+      </ul>
+      <p>This information is used solely to:</p>
+      <ul>
+        <li>Manage account-related features</li>
+        <li>Sync preferences where applicable</li>
+        <li>Manage access to premium features</li>
+      </ul>
+      <p>
+        We do not access any additional data from your account beyond what is necessary for these
+        functions.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>3. In-App Purchases &amp; Subscriptions</h2>
+      <p>
+        The App uses a trusted third-party billing provider to process in-app purchases
+        and subscriptions. This provider may collect limited information required to
+        validate and manage your transactions.
+      </p>
+      <p>We do <strong>not</strong> store:</p>
+      <ul>
+        <li>Credit card details</li>
+        <li>Payment information</li>
+        <li>Your full billing history</li>
+      </ul>
+      <p>
+        All payments and validations are handled securely by platform-approved services.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>4. How We Use Information</h2>
+      <p>We use information solely for functionality you request, including:</p>
+      <ul>
+        <li>Displaying widgets and device content</li>
+        <li>Providing launcher customisation and shortcuts</li>
+        <li>Showing notifications and media information</li>
+        <li>Enabling sign-in and subscription access</li>
+        <li>Retrieving and displaying online content at your request</li>
+      </ul>
+      <p>We do <strong>not</strong> use your data for:</p>
+      <ul>
+        <li>Advertising</li>
+        <li>Selling personal information</li>
+        <li>Tracking your behaviour for profiling</li>
+      </ul>
+
+      <hr class="section-divider" />
+
+      <h2>5. Data Storage &amp; Security</h2>
+      <p>
+        We do <strong>not</strong> operate external servers for personal data storage in relation
+        to your on-device content. Most data remains exclusively on your device.
+      </p>
+      <p>
+        Where authentication or subscription-related data is processed, it is handled by
+        third-party providers that follow industry-standard security practices.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>6. Third-Party Services</h2>
+      <p>The App may interact with trusted third-party services for:</p>
+      <ul>
+        <li>Authentication</li>
+        <li>Billing and subscriptions</li>
+        <li>Content retrieval</li>
+      </ul>
+      <p>
+        These services handle only the minimal data required to provide their functionality
+        and are governed by their own privacy policies.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>7. Children’s Privacy</h2>
+      <p>
+        The App is not intended for children under 13. We do not knowingly collect personal
+        information from children. If you believe a child has provided us with personal data,
+        please contact us so we can take appropriate action.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>8. Your Choices</h2>
+      <p>You have control over many aspects of your data:</p>
+      <ul>
+        <li>You can disable permissions at any time in your device settings.</li>
+        <li>You can use the App without signing in, where applicable.</li>
+        <li>You can choose not to subscribe to premium features.</li>
+      </ul>
+      <p>
+        Because most data is stored locally on your device, uninstalling the App will remove
+        locally stored information associated with the App.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>9. Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time to reflect changes to the App or
+        legal requirements. Any significant changes will be clearly communicated in the App
+        or through an updated version of this page.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>10. Contact Us</h2>
+      <p>
+        If you have any questions or concerns about this Privacy Policy or how your data is handled,
+        you can contact us at:
+      </p>
+      <div class="contact-block">
+        <p><strong>Support</strong></p>
+        <p>Email: <a href="mailto:YOUR_SUPPORT_EMAIL">hello@tigerstorm.dev</a></p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Now Launcher. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // keep year up to date
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
