@@ -22,6 +22,8 @@
       --radius-xl: 2rem;
       --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.08);
       --container-width: 1440px;
+      --nav-drawer-bg: #ffffff;
+      --nav-drawer-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
     }
 
     * {
@@ -52,7 +54,9 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-    }   .site-header {
+    }
+
+    .site-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -88,12 +92,12 @@
       border-right-color: transparent;
       transform: rotate(-30deg);
     }
-    
+
     .logo-icon {
       font-family: "Material Symbols Rounded";
       font-variation-settings:
         'FILL' 0,
-        'wght' 100,
+        'wght' 400,
         'GRAD' 0,
         'opsz' 48;
       font-size: 36px;
@@ -105,35 +109,34 @@
       justify-content: center;
     }
 
-    .material-symbols-outlined {
-      font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 48;
-    }
-
+    
     .brand span {
       font-weight: 400;
     }
 
+    /* NAVIGATION */
     .nav {
-      flex: 1;
       display: flex;
-      justify-content: right;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 16px;
+    }
+
+    .nav-links {
+      display: flex;
       gap: 24px;
       font-size: 14px;
       color: #4b5563;
     }
 
-    .nav a {
+    .nav-links a {
       text-decoration: none;
       color: inherit;
       position: relative;
       padding-bottom: 3px;
     }
 
-    .nav a:hover::after {
+    .nav-links a:hover::after {
       content: "";
       position: absolute;
       left: 0;
@@ -143,12 +146,12 @@
       background: #111827;
     }
 
-    .nav a.is-active {
+    .nav-links a.is-active {
       font-weight: 500;
       color: #111827;
     }
 
-    .nav a.is-active::after {
+    .nav-links a.is-active::after {
       content: "";
       position: absolute;
       left: 0;
@@ -156,6 +159,62 @@
       width: 100%;
       height: 2px;
       background: #111827;
+    }
+
+    .nav-toggle {
+      display: none;
+      border: none;
+      background: rgba(17, 17, 17, 0.06);
+      border-radius: 999px;
+      padding: 6px 10px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-toggle .material-symbols-outlined {
+      font-size: 22px;
+    }
+
+    .nav-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease-out;
+      z-index: 20;
+    }
+
+    .nav-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-links--drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: 260px;
+      background: var(--nav-drawer-bg);
+      box-shadow: var(--nav-drawer-shadow);
+      padding: 4.5rem 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      transform: translateX(100%);
+      transition: transform 0.2s ease-out;
+      z-index: 30;
+      font-size: 0.95rem;
+    }
+
+    .nav-links--drawer.is-open {
+      transform: translateX(0);
+    }
+
+    .nav-links--drawer a {
+      padding: 0.25rem 0;
     }
 
     .play-badge-link {
@@ -179,7 +238,7 @@
     }
 
     .hero-text {
-      flex: 1 1 520px;
+      flex: 1 1 320px;
       max-width: 620px;
     }
 
@@ -248,15 +307,18 @@
 
     /* DEVICE MOCKUP + ANGLED PHONE */
     .hero-cards {
-      flex: 0 1 460px;
+      flex: 1 1 320px;
       display: flex;
       justify-content: center;
+      padding: 3rem 0; /* Added spacious padding */
     }
 
     .device-mockup {
       position: relative;
       width: 100%;
       max-width: 440px;
+      margin: 2.5rem auto; /* More breathing room */
+      aspect-ratio: 9 / 19.5;
     }
 
     .device-shell {
@@ -264,6 +326,9 @@
       padding: 10px;
       background: #050509;
       box-shadow: 0 28px 60px rgba(15, 23, 42, 0.55);
+      height: 100%;
+      display: flex;
+      align-items: stretch;
     }
 
     .device-shell--back {
@@ -285,10 +350,14 @@
       overflow: hidden;
       background: #000;
       box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+      flex: 1;
+      display: flex;
+      align-items: stretch;
     }
 
     .device-screen img {
       width: 100%;
+      height: 100%;
       display: block;
       object-fit: cover;
     }
@@ -296,7 +365,7 @@
     /* FOOTER */
     footer {
       border-top: 1px solid var(--border-subtle);
-      padding: 1.5rem 1.5rem 2rem;
+      padding: 2rem 1.5rem 0rem;
       font-size: 0.8rem;
       color: var(--text-muted);
     }
@@ -324,40 +393,110 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      .nav-links { display: none; }
-      .hero { gap: 3rem; padding-top: 3rem; }
-      .hero-cards { order: -1; }
+      .hero {
+        gap: 3rem;
+        padding-top: 3rem;
+      }
+
+      .hero-cards {
+        order: -1;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      /* mobile drawer uses separate element */
+      .nav-links--drawer {
+        display: flex;
+      }
+
+      .device-mockup {
+        max-width: 360px;
+        aspect-ratio: 9 / 19;
+      }
+
+      .device-shell--back {
+        transform: rotate(6deg) translate(-12px, 18px);
+      }
+
+      .device-shell--front {
+        transform: rotate(-6deg) translateX(4px);
+      }
     }
 
     @media (max-width: 600px) {
       .page {
         padding-inline: 1.1rem;
       }
-      .hero-title { font-size: 2.4rem; }
-      .device-mockup { max-width: 100%; }
+
+      .hero-title {
+        font-size: 2.4rem;
+      }
+
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-cards {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .device-mockup {
+        max-width: min(320px, 100%);
+        aspect-ratio: 9 / 18;
+      }
+
+      /* On very small screens reduce visual noise by hiding the back phone */
+      .device-shell--back {
+        display: none;
+      }
+
+      .device-shell--front {
+        transform: none;
+      }
     }
   </style>
 </head>
 
 <body>
-   <div class="page">
+  <div class="page">
     <!-- Top navigation -->
     <header class="site-header">
       <div class="brand">
-        <span class="logo-icon">
-          <span class="material-symbols-outlined">bolt</span>
-        </span>
+        <span class="logo-icon">bolt</span>
         <span>Now Launcher</span>
       </div>
 
-      <nav class="nav">
-        <a href="/" class="is-active">Home</a>
-        <a href="/privacy">Privacy</a>
-        <a href="/terms" >Terms of Service</a>
-      </nav>
+      <nav class="nav" aria-label="Primary navigation">
+        <!-- Desktop links -->
+        <div class="nav-links" aria-hidden="false">
+          <a href="/" class="is-active">Home</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms of Service</a>
+        </div>
 
-      
+        <!-- Hamburger button (shown on small screens) -->
+        <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <div class="brand">
+       		 <span class="logo-icon">menu</span></div>
+        </button>
+      </nav>
     </header>
+
+    <!-- Mobile drawer + backdrop -->
+    <div class="nav-backdrop" data-nav-backdrop></div>
+    <div class="nav-links nav-links--drawer" data-nav-drawer>
+      <a href="/" class="is-active">Home</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms of Service</a>
+    </div>
 
     <!-- HERO -->
     <section class="hero" id="overview">
@@ -372,17 +511,17 @@
         </p>
 
         <div class="header-cta">
-        <a
-          href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
-          class="play-badge-link"
-        >
-          <img
-            src="/assets/play_badge.svg"
-            alt="Get it on Google Play"
-            class="play-badge"
-          />
-        </a>
-      </div>
+          <a
+            href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
+            class="play-badge-link"
+          >
+            <img
+              src="/assets/play_badge.svg"
+              alt="Get it on Google Play"
+              class="play-badge"
+            />
+          </a>
+        </div>
       </div>
 
       <!-- DEVICE MOCKUP + ANGLED PHONE RENDER -->
@@ -406,17 +545,58 @@
         </div>
       </div>
     </section>
-    
-    
 
-  <footer>
-    <div class="footer-inner">
-      <div>&copy; TIGERSTORM LIMITED — 2025</div>
-      <div class="footer-links">
-        <a href="privacy/">Privacy Policy</a>
-        <a href="terms/">Terms of Service</a>
+    <footer>
+      <div class="footer-inner">
+        <div>&copy; TIGERSTORM LIMITED — 2025</div>
+        <div class="footer-links">
+          <a href="privacy/">Privacy Policy</a>
+          <a href="terms/">Terms of Service</a>
+        </div>
       </div>
-    </div>
-  </footer></div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const toggle = document.querySelector('.nav-toggle');
+      const drawer = document.querySelector('[data-nav-drawer]');
+      const backdrop = document.querySelector('[data-nav-backdrop]');
+
+      if (!toggle || !drawer || !backdrop) return;
+
+      const iconEl = toggle.querySelector('.material-symbols-outlined');
+
+      function setOpen(isOpen) {
+        drawer.classList.toggle('is-open', isOpen);
+        backdrop.classList.toggle('is-open', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        if (iconEl) {
+          iconEl.textContent = isOpen ? 'close' : 'menu';
+        }
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = !drawer.classList.contains('is-open');
+        setOpen(isOpen);
+      });
+
+      backdrop.addEventListener('click', () => setOpen(false));
+
+      drawer.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target instanceof Element && target.tagName === 'A') {
+          setOpen(false);
+        }
+      });
+
+      // Close on ESC
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          setOpen(false);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
