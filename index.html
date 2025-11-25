@@ -15,7 +15,7 @@
 
   <style>
     :root {
-      --bg: #f6f6f8;
+      --bg: #f6f6f8
       --text-main: #111111;
       --text-muted: #6b6b6f;
       --border-subtle: #e1e1e7;
@@ -329,6 +329,12 @@
       height: 100%;
       display: flex;
       align-items: stretch;
+      /* Smooth animation base */
+      transition:
+        transform 0.4s ease,
+        opacity 0.4s ease,
+        filter 0.4s ease,
+        box-shadow 0.4s ease;
     }
 
     .device-shell--back {
@@ -360,6 +366,22 @@
       height: 100%;
       display: block;
       object-fit: cover;
+    }
+
+    /* HOVER ANIMATION: reveal the back device a LOT more */
+    .device-mockup:hover .device-shell--front {
+      /* Slide the front phone further up/right and make it a touch transparent
+         so the back image can clearly be seen */
+      transform: rotate(-2deg) translate(22px, -26px) scale(0.98);
+      opacity: 0.9;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.5);
+    }
+
+    .device-mockup:hover .device-shell--back {
+      /* Bring the back phone forward visually */
+      opacity: 1;
+      transform: rotate(8deg) translate(-40px, 34px) scale(1.03);
+      filter: saturate(1.08) brightness(1.04);
     }
 
     /* FOOTER */
@@ -485,7 +507,7 @@
         <!-- Hamburger button (shown on small screens) -->
         <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
         <div class="brand">
-       		 <span class="logo-icon">menu</span></div>
+         	 <span class="logo-icon">menu</span></div>
         </button>
       </nav>
     </header>
@@ -538,9 +560,8 @@
           <!-- Front device (angled foreground phone) -->
           <div class="device-shell device-shell--front">
             <div class="device-screen">
-              <img src="assets/Screenshot_20251125-073547.png",
+              <img src="assets/Screenshot_20251125-073547.png"
                    alt="Now Launcher preview on phone">
-              <!-- src="https://images.pexels.com/photos/775201/pexels-photo-775201.jpeg?auto=compress&cs=tinysrgb&w=750&h=750" -->
             </div>
           </div>
         </div>
