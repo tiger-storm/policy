@@ -11,10 +11,15 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
   />
+  
+    <!-- Google Icon Font (for Bolt + card icons) -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 
   <style>
     :root {
-      --bg: #f3f4f6;
+	  --bg: #f6f6f8
       --bg-soft: #e5e7eb;
       --card-bg: #ffffff;
       --text-main: #111827;
@@ -37,9 +42,7 @@
     body {
       margin: 0;
       padding: 0;
-      /* FIX 2: Use 100dvh for dynamic viewport height to respect mobile browser UI bars */
-      height: 100dvh; 
-      height: 100vh; /* Fallback */
+      height: 100dvh; /* Fixed height for viewport */
       overflow: hidden; /* Prevent page-level scroll */
     }
 
@@ -47,19 +50,90 @@
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
         "SF Pro Text", "Segoe UI", sans-serif;
       color: var(--text-main);
-      background:
-        radial-gradient(circle at top left, #dbeafe 0, transparent 55%),
-        radial-gradient(circle at bottom right, #e5e7eb 0, transparent 55%),
-        var(--bg);
+      background: radial-gradient(circle at top left, #ffffff 0, #f4f4f7 50%, #f0f0f4 100%);
     }
 
     .page {
-      max-width: 1400px;
       margin: 0 auto;
       height: 100%;
-      padding: 1.5rem;
+      padding: 0;
       display: flex;
       flex-direction: column;
+      max-width: 1440px;
+    }
+    
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      padding-bottom: 16px;
+      padding: 8px 24px;
+      max-width: 1440px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      font-size: 22px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    
+
+    .brand-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #111827, #111827 35%, #000 80%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-logo::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border-radius: inherit;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-top-color: transparent;
+      border-right-color: transparent;
+      transform: rotate(-30deg);
+    }
+
+    .logo-icon {
+      font-family: "Material Symbols Rounded";
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48;
+      font-size: 36px;
+      color: #111;
+      border-radius: 50%;
+      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    
+    .brand span {
+      font-weight: 400;
+    }
+
+
+    .play-badge-link {
+      display: inline-block;
+    }
+
+    .play-badge {
+      height: 40px;
+      width: auto;
+      display: block;
     }
 
     /* Feature section wrapper - controls layout */
@@ -83,21 +157,21 @@
 
     @media (max-width: 768px) {
       /* Mobile Layout Updates:
-         1. Keep body fixed height (100dvh).
+         1. Keep body fixed height (100vh).
          2. Flex column layout.
          3. Image fills remaining space.
          4. List stays at bottom.
       */
       html, body {
-        height: 100dvh;
-        height: 100vh; /* Fallback */
+        height: 100vh;
         overflow: hidden;
       }
       .page {
         height: 100%;
         display: flex;
         flex-direction: column;
-        padding-bottom: 0.5rem;
+        /* padding-bottom: 0.5rem; */
+		padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
       }
       .feature-section {
         height: 100%;
@@ -130,11 +204,7 @@
     }
 
     .feature-preview-card {
-      background: var(--card-bg);
-      border-radius: 2rem;
-      box-shadow: var(--shadow-soft);
       padding: 2.2rem 2rem;
-      border: 1px solid rgba(148, 163, 184, 0.28);
       display: flex;
       justify-content: center;
       max-height: 90%; /* Ensure it doesn't overflow vertically */
@@ -161,7 +231,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      box-shadow: 0 40px 90px rgba(15, 23, 42, 0.72);
+      box-shadow: 0 24px 24px rgba(15, 23, 42, 0.72);
       padding: 0.45rem;
     }
 
@@ -213,17 +283,14 @@
       gap: 1.2rem;
       height: 100%;
       overflow-y: auto; /* Internal scrolling only */
-      padding: 1rem 1rem 1rem 0.2rem;
+      padding: 2rem 2rem 2rem 0.2rem;
       align-items: center; /* Centers the cards if the col is wider than 240px */
     }
 
     .feature-list::-webkit-scrollbar {
-      width: 6px;
+      width: 0px;
     }
-    .feature-list::-webkit-scrollbar-thumb {
-      background: rgba(148, 163, 184, 0.8);
-      border-radius: 999px;
-    }
+    
 
     .feature-pill-caption {
       font-size: 0.78rem;
@@ -254,14 +321,12 @@
       width: 100%;
       /* Requirement: Max 240px is handled by parent max-width + aspect ratio ensures height follows */
       aspect-ratio: 1 / 1; 
-      
       border-radius: 1.4rem;
-      border: 1px solid rgba(148, 163, 184, 0.24);
       background: #f9fafb;
       display: flex;
       align-items: stretch;
       justify-content: stretch;
-      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.05);
+
       transition:
         box-shadow var(--transition-fast),
         transform var(--transition-fast),
@@ -272,14 +337,11 @@
 
     .feature-list-item:hover .feature-list-aspect {
       transform: translateY(-2px);
-      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.1);
       background: #ffffff;
       border-color: rgba(15, 23, 42, 0.12);
     }
 
     .feature-list-item.is-active .feature-list-aspect {
-      border-color: #111827;
-      box-shadow: 0 24px 55px rgba(15, 23, 42, 0.18);
       background: #ffffff;
     }
 
@@ -337,17 +399,17 @@
         max-height: none;
         overflow-x: auto;
         overflow-y: hidden;
+        padding-left: 2rem;
         padding-right: 0;
         padding-bottom: 0.5rem;
         margin-top: 0;
-        /* FIX 1: Ensure cards are vertically centralized within the horizontal scroll row */
-        align-items: center; 
+        align-items: stretch;
       }
 
       .feature-list-item {
         flex: 0 0 72%;
-        min-width: 220px;
-        max-width: none; /* Allow wider on mobile horizontal scroll */
+        min-width: 120px;
+        max-width: 250px; /* Allow wider on mobile horizontal scroll */
       }
 
       .feature-list-aspect {
@@ -359,6 +421,26 @@
 </head>
 <body>
   <main class="page">
+  
+   <!-- <header class="site-header">
+      <a href="/" class="brand">
+        <span class="logo-icon">bolt</span>
+        <span>Now Launcher</span>
+      </a>
+       <div class="header-cta">
+          <a
+            href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
+            class="play-badge-link"
+          >
+            <img
+
+              src="/assets/play_badge.svg"
+              alt="Get it on Google Play"
+              class="play-badge"
+            />
+          </a>
+        </div>
+    </header> -->
     
     <!-- Header Removed per instruction -->
 
@@ -372,25 +454,25 @@
               <div class="feature-preview-inner-frame">
                 <!-- Using different placeholder images to prove the switch works -->
                 <img
-                  src="https://placehold.co/300x650/1e293b/FFF?text=Smart+Cards+View"
+                  src="/assets/Screenshot_20251125-073547.png"
                   alt="Smart cards overview screenshot"
                   class="feature-preview-image is-active"
                   data-feature-id="smart"
                 />
                 <img
-                  src="https://placehold.co/300x650/334155/FFF?text=Personalisation"
+                  src="/assets/Screenshot_20251125-093005.png"
                   alt="Deep personalisation screenshot"
                   class="feature-preview-image"
                   data-feature-id="personalisation"
                 />
                 <img
-                  src="https://placehold.co/300x650/475569/FFF?text=Routine+Stacks"
+                  src="/assets/Screenshot_20251125-093151.png"
                   alt="Routine-based stacks screenshot"
                   class="feature-preview-image"
                   data-feature-id="routines"
                 />
                 <img
-                  src="https://placehold.co/300x650/64748b/FFF?text=Media+Controls"
+                  src="/assets/Screenshot_20251125-073547.png"
                   alt="Compact media controls screenshot"
                   class="feature-preview-image"
                   data-feature-id="media"
@@ -402,8 +484,19 @@
 
         <!-- Right side feature list -->
         <aside class="feature-list" aria-label="Now Launcher features">
-          <div class="feature-pill-caption">Browse by feature</div>
+			<div class="header-cta">
+          <a
+            href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
+            class="play-badge-link"
+          >
+            <img
 
+              src="/assets/play_badge.svg"
+              alt="Get it on Google Play"
+              class="play-badge"
+            />
+          </a>
+        </div>
           <button
             class="feature-list-item is-active"
             type="button"
@@ -418,8 +511,6 @@
                   </p>
                 </div>
                 <div class="feature-list-meta-row">
-                  <span class="feature-list-tag">Cards</span>
-                  <span class="feature-list-count">1 / 4</span>
                 </div>
               </div>
             </div>
