@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Features Gallery - Now Launcher</title>
+  <title>Features</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -320,9 +320,11 @@
     .feature-list-aspect {
       position: relative;
       width: 100%;
-      aspect-ratio: 1 / 1; 
+      aspect-ratio: 1.33 / 1; 
       border-radius: 1.4rem;
-      background: #f9fafb;
+		background: transparent;
+	  border-style: solid;
+	  border-color: #e0e1e1;
       display: flex;
       align-items: stretch;
       justify-content: stretch;
@@ -337,24 +339,25 @@
     .feature-list-item:hover .feature-list-aspect {
       transform: translateY(-2px);
       background: #ffffff;
-      border-color: rgba(15, 23, 42, 0.12);
     }
 
     .feature-list-item.is-active .feature-list-aspect {
       background: #ffffff;
+      border-color: #e0e1e1;
     }
 
     .feature-list-content {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
       width: 100%;
     }
 
     .feature-list-title {
-      font-size: 0.95rem;
+      font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: -0.02em;
+      letter-spacing: 0.01rem;
+      text-transform: uppercase;
       margin-bottom: 0.3rem;
     }
 
@@ -438,28 +441,34 @@
             <div class="feature-preview-phone-shell">
               <div class="feature-preview-inner-frame">
                 <img
-                  src="/assets/Screenshot_20251125-073547.png"
-                  alt="Smart cards overview screenshot"
+                  src="/assets/Screenshot_20251125-093005.png"
+                  alt="Smart Suggestions"
                   class="feature-preview-image is-active"
                   data-feature-id="smart"
                 />
                 <img
-                  src="/assets/Screenshot_20251125-093005.png"
-                  alt="Deep personalisation screenshot"
+                  src="/assets/Screenshot_20251126-195646.png"
+                  alt="Quick Settings"
+                  class="feature-preview-image"
+                  data-feature-id="settings"
+                />
+                <img
+                  src="/assets/Screenshot_20251126-200006.png"
+                  alt="Personalisation"
                   class="feature-preview-image"
                   data-feature-id="personalisation"
                 />
                 <img
-                  src="/assets/Screenshot_20251125-093151.png"
-                  alt="Routine-based stacks screenshot"
+                  src="/assets/Screenshot_20251126-200058.png"
+                  alt="Customisation"
                   class="feature-preview-image"
-                  data-feature-id="routines"
+                  data-feature-id="customisation"
                 />
                 <img
-                  src="/assets/Screenshot_20251125-073547.png"
-                  alt="Compact media controls screenshot"
+                  src="/assets/Screenshot_20251126-200036.png"
+                  alt="Permissions"
                   class="feature-preview-image"
-                  data-feature-id="media"
+                  data-feature-id="permissions"
                 />
               </div>
             </div>
@@ -489,17 +498,52 @@
             <div class="feature-list-aspect">
               <div class="feature-list-content">
                 <div>
-                  <div class="feature-list-title">Smart cards overview</div>
+                  <div class="feature-list-title">Smart Suggestions</div>
                   <p class="feature-list-description">
-                    Time, weather, upcoming events and key apps combined into a single, glanceable card.
+					See what you need, when you need it. Giving you timely, relevant actions based on today and what’s coming up next.
                   </p>
                 </div>
-                <div class="feature-list-meta-row"></div>
               </div>
             </div>
           </button>
 
+
           <button
+            class="feature-list-item"
+            type="button"
+            data-feature-target="settings"
+          >
+            <div class="feature-list-aspect">
+              <div class="feature-list-content">
+                <div>
+                  <div class="feature-list-title">Quick Settings</div>
+                  <p class="feature-list-description">
+                  Instant access to the settings you use most—right from your homescreen.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </button>
+          
+          <button
+            class="feature-list-item"
+            type="button"
+            data-feature-target="customisation"
+          >
+            <div class="feature-list-aspect">
+              <div class="feature-list-content">
+                <div>
+                  <div class="feature-list-title">Customisation</div>
+                  <p class="feature-list-description">
+                  Your launcher is yours, adjust it exactly how you want.
+                  
+                  </p>
+                </div>
+              </div>
+            </div>
+          </button>
+          
+           <button
             class="feature-list-item"
             type="button"
             data-feature-target="personalisation"
@@ -507,81 +551,34 @@
             <div class="feature-list-aspect">
               <div class="feature-list-content">
                 <div>
-                  <div class="feature-list-title">Deep personalisation</div>
+                  <div class="feature-list-title">Personalisation</div>
                   <p class="feature-list-description">
-                    Adjust typography, spacing and card styling to stay readable without losing personality.
+                  
+                  Shape your experience, set your preferences to match your style.
                   </p>
                 </div>
-                <div class="feature-list-meta-row">
-                  <span class="feature-list-tag">Style</span>
-                  <span class="feature-list-count">2 / 4</span>
+              </div>
+            </div>
+          </button>
+          
+           <button
+            class="feature-list-item"
+            type="button"
+            data-feature-target="permissions"
+          >
+            <div class="feature-list-aspect">
+              <div class="feature-list-content">
+                <div>
+                  <div class="feature-list-title">Permissions</div>
+                  <p class="feature-list-description">
+                 Adjust your permissions and your security as you require.
+                  </p>
                 </div>
               </div>
             </div>
           </button>
 
-          <button
-            class="feature-list-item"
-            type="button"
-            data-feature-target="routines"
-          >
-            <div class="feature-list-aspect">
-              <div class="feature-list-content">
-                <div>
-                  <div class="feature-list-title">Routine-based stacks</div>
-                  <p class="feature-list-description">
-                    Create stacks for morning, work and evening so the right shortcuts are ready.
-                  </p>
-                </div>
-                <div class="feature-list-meta-row">
-                  <span class="feature-list-tag">Routines</span>
-                  <span class="feature-list-count">3 / 4</span>
-                </div>
-              </div>
-            </div>
-          </button>
-
-          <button
-            class="feature-list-item"
-            type="button"
-            data-feature-target="media"
-          >
-            <div class="feature-list-aspect">
-              <div class="feature-list-content">
-                <div>
-                  <div class="feature-list-title">Compact media</div>
-                  <p class="feature-list-description">
-                    Keep playback controls subtle and aligned with the rest of your layout.
-                  </p>
-                </div>
-                <div class="feature-list-meta-row">
-                  <span class="feature-list-tag">Media</span>
-                  <span class="feature-list-count">4 / 4</span>
-                </div>
-              </div>
-            </div>
-          </button>
-
-          <button
-            class="feature-list-item"
-            type="button"
-            data-feature-target="smart"
-          >
-            <div class="feature-list-aspect">
-              <div class="feature-list-content">
-                <div>
-                  <div class="feature-list-title">Scroll Test Item</div>
-                  <p class="feature-list-description">
-                    This item exists to demonstrate the internal scrolling logic of this column.
-                  </p>
-                </div>
-                <div class="feature-list-meta-row">
-                  <span class="feature-list-tag">Extra</span>
-                  <span class="feature-list-count">5 / 4</span>
-                </div>
-              </div>
-            </div>
-          </button>
+          
         </aside>
       </div>
     </section>
