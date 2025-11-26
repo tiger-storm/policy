@@ -94,7 +94,7 @@
       transform: rotate(-30deg);
     }
     
-       .logo-icon {
+    .logo-icon {
       font-family: "Material Symbols Rounded";
       font-variation-settings:
         'FILL' 0,
@@ -122,23 +122,29 @@
       font-weight: 400;
     }
 
+     /* NAVIGATION */
     .nav {
-      flex: 1;
       display: flex;
-      justify-content: right;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 16px;
+    }
+
+    .nav-links {
+      display: flex;
       gap: 24px;
       font-size: 14px;
       color: #4b5563;
     }
 
-    .nav a {
+    .nav-links a {
       text-decoration: none;
       color: inherit;
       position: relative;
       padding-bottom: 3px;
     }
 
-    .nav a:hover::after {
+    .nav-links a:hover::after {
       content: "";
       position: absolute;
       left: 0;
@@ -148,12 +154,12 @@
       background: #111827;
     }
 
-    .nav a.is-active {
+    .nav-links a.is-active {
       font-weight: 500;
       color: #111827;
     }
 
-    .nav a.is-active::after {
+    .nav-links a.is-active::after {
       content: "";
       position: absolute;
       left: 0;
@@ -163,13 +169,6 @@
       background: #111827;
     }
 
-    .header-cta {
-      display: flex;
-      align-items: center;
-      font-size: 14px;
-    }
-
-	
     .nav-toggle {
       display: none;
       border: none;
@@ -225,7 +224,6 @@
     .nav-links--drawer a {
       padding: 0.25rem 0;
     }
-  
 
     .play-badge-link {
       display: inline-block;
