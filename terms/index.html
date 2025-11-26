@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terms of Service - Now Launcher</title>
+  <title>Terms of Service</title>
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,6 +25,8 @@
       --text-muted: #6b7280;
       --border-subtle: #e5e7eb;
       --content-width: 1120px;
+      --nav-drawer-bg: #ffffff;
+      --nav-drawer-shadow: 0 18px 45px rgba(15, 23, 42, 0.3);
     }
 
     * {
@@ -91,12 +94,12 @@
       border-right-color: transparent;
       transform: rotate(-30deg);
     }
-    
+
     .logo-icon {
       font-family: "Material Symbols Rounded";
       font-variation-settings:
         'FILL' 0,
-        'wght' 100,
+        'wght' 400,
         'GRAD' 0,
         'opsz' 48;
       font-size: 36px;
@@ -108,35 +111,49 @@
       justify-content: center;
     }
 
-    .material-symbols-outlined {
+    .nav-icon {
+      font-family: "Material Symbols Rounded";
       font-variation-settings:
         'FILL' 0,
         'wght' 400,
         'GRAD' 0,
         'opsz' 48;
-    }
+      font-size: 22px;
+      color: #111;
+      border-radius: 50%;
+      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }  
 
     .brand span {
       font-weight: 400;
     }
 
+    /* NAVIGATION */
     .nav {
-      flex: 1;
       display: flex;
-      justify-content: right;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 16px;
+    }
+
+    .nav-links {
+      display: flex;
       gap: 24px;
       font-size: 14px;
       color: #4b5563;
     }
 
-    .nav a {
+    .nav-links a {
       text-decoration: none;
       color: inherit;
       position: relative;
       padding-bottom: 3px;
     }
 
-    .nav a:hover::after {
+    .nav-links a:hover::after {
       content: "";
       position: absolute;
       left: 0;
@@ -146,12 +163,12 @@
       background: #111827;
     }
 
-    .nav a.is-active {
+    .nav-links a.is-active {
       font-weight: 500;
       color: #111827;
     }
 
-    .nav a.is-active::after {
+    .nav-links a.is-active::after {
       content: "";
       position: absolute;
       left: 0;
@@ -161,10 +178,55 @@
       background: #111827;
     }
 
-    .header-cta {
-      display: flex;
+    .nav-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      padding: 6px 10px;
+      cursor: pointer;
       align-items: center;
-      font-size: 14px;
+      justify-content: center;
+    }
+
+    .nav-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease-out;
+      z-index: 20;
+    }
+
+    .nav-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-links--drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: 260px;
+      background: var(--nav-drawer-bg);
+      box-shadow: var(--nav-drawer-shadow);
+      padding: 4.5rem 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      transform: translateX(100%);
+      transition: transform 0.2s ease-out;
+      z-index: 30;
+      font-size: 0.95rem;
+    }
+
+    .nav-links--drawer.is-open {
+      transform: translateX(0);
+    }
+
+    .nav-links--drawer a {
+      padding: 0.25rem 0;
     }
 
     .play-badge-link {
@@ -192,6 +254,19 @@
         grid-template-columns: minmax(0, 1fr);
         gap: 32px;
       }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      /* Ensure the drawer stays visible on mobile */
+      .nav-links--drawer {
+        display: flex;
+      }
     }
 
     .hero-kicker {
@@ -212,7 +287,30 @@
       display: inline-block;
     }
 
-    /* Policy content */
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .hero-primary {
+      padding: 11px 20px;
+      border-radius: 999px;
+      border: none;
+      background: #111827;
+      color: #f9fafb;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .hero-primary:hover {
+      opacity: 0.92;
+    }
+
+    /* Policy / Terms content */
 
     .policy-wrapper {
       margin-top: 40px;
@@ -336,10 +434,6 @@
         gap: 16px;
       }
 
-      .nav {
-        display: none;
-      }
-
       .policy-wrapper {
         padding: 22px 18px 26px;
       }
@@ -356,43 +450,46 @@
     <!-- Top navigation -->
     <header class="site-header">
       <div class="brand">
-        <span class="logo-icon">
-          <span class="material-symbols-outlined">bolt</span>
-        </span>
+        <span class="logo-icon">bolt</span>
         <span>Now Launcher</span>
       </div>
 
-      <nav class="nav">
-        <a href="/">Home</a>
-        <a href="/privacy">Privacy</a>
-        <a href="/terms" class="is-active">Terms of Service</a>
-      </nav>
+      <nav class="nav" aria-label="Primary navigation">
+        <!-- Desktop links -->
+        <div class="nav-links" aria-hidden="false">
+          <a href="/">Home</a>
+          <a href="/features">Features</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms" class="is-active">Terms of Service</a>
+        </div>
 
-      <!-- <div class="header-cta">
-        <a
-          href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
-          class="play-badge-link"
-        >
-          <img
-            src="/assets/play_badge.svg"
-            alt="Get it on Google Play"
-            class="play-badge"
-          />
-        </a>
-      </div> -->
+        <!-- Hamburger button (shown on small screens) -->
+        <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+          <span class="nav-icon">menu</span>
+        </button>
+      </nav>
     </header>
+
+    <!-- Mobile drawer + backdrop -->
+    <div class="nav-backdrop" data-nav-backdrop></div>
+    <div class="nav-links nav-links--drawer" data-nav-drawer>
+      <a href="/">Home</a>
+      <a href="/features">Features</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms" class="is-active">Terms of Service</a>
+    </div>
 
     <!-- Hero section -->
     <section class="hero">
       <div class="hero-copy">
-        <div class="hero-kicker">Now Launcher · Terms</div>
+        <div class="hero-kicker">Now launcher · Terms</div>
         <h1 class="hero-title">
           <span>Terms of Service</span><br />
         </h1>
+        <!-- Google Play badge under the title -->
         <a
           href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
-          class="play-badge-link"
-        >
+          class="play-badge-link">
           <img
             src="/assets/play_badge.svg"
             alt="Get it on Google Play"
@@ -415,7 +512,6 @@
         be bound by these Terms. If you do not agree to these Terms, you must not use the App.
       </p>
 
-      <!-- (Optional) Not legal advice note (comment only) -->
       <!-- NOTE: This template is provided for general informational purposes only and does not constitute legal advice. -->
 
       <hr class="section-divider" />
@@ -527,7 +623,7 @@
         The App may request Android permissions (such as access to notifications, apps list,
         health data, calendar, contacts, or location) to provide specific features.
         Our use of these permissions is described in more detail in our
-        <a href="/policy/privacy">Privacy Policy</a>.
+        <a href="/privacy">Privacy Policy</a>.
       </p>
       <p>
         By granting permissions, you authorise the App to access the relevant data solely
@@ -546,4 +642,216 @@
         <li>Infringes the rights of others, including privacy, intellectual property, or other rights.</li>
         <li>Interferes with or disrupts the operation of the App or connected services.</li>
         <li>Attempts to gain unauthorised access to systems, networks, or data.</li>
-        <li>Introduces malware, viruses, or other
+        <li>Introduces malware, viruses, or other harmful code.</li>
+      </ul>
+      <p>
+        We may take reasonable action, including limiting or terminating your access to the App,
+        where we believe you are misusing the App or violating these Terms.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>8. Third-Party Services &amp; Links</h2>
+      <p>
+        The App may integrate or interact with third-party services such as:
+      </p>
+      <ul>
+        <li>Authentication providers (e.g., Google sign-in).</li>
+        <li>Billing and subscription platforms (e.g., Google Play Billing).</li>
+        <li>Health and fitness platforms (e.g., Health Connect).</li>
+        <li>Browsers, search engines, or other apps on your device.</li>
+      </ul>
+      <p>
+        Your use of third-party services is governed by their own terms and privacy policies.
+        We are not responsible for the content, services, or practices of third parties and do
+        not endorse them.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>9. Intellectual Property</h2>
+      <p>
+        All rights, title, and interest in and to the App (including but not limited to
+        software, design, text, graphics, logos, icons, and other content) are owned by us
+        or our licensors and are protected by copyright, trademark, and other laws.
+      </p>
+      <p>
+        You retain any rights you have to content you create on your device while using the
+        App (for example, your app layout or configuration), but this does not grant you any
+        rights in the App itself.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>10. Warranty Disclaimer</h2>
+      <p>
+        To the maximum extent permitted by law, the App is provided on an
+        <strong>“as is” and “as available”</strong> basis, without warranties of any
+        kind, whether express or implied.
+      </p>
+      <p>We do not guarantee that:</p>
+      <ul>
+        <li>The App will be error-free, uninterrupted, or secure.</li>
+        <li>Any defects will be corrected.</li>
+        <li>The App will be compatible with every device, Android version, or app.</li>
+      </ul>
+      <p>
+        Your use of the App is at your own risk, and you are solely responsible for any
+        damage to your device or loss of data that may result from using the App.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>11. Limitation of Liability</h2>
+      <p>
+        To the maximum extent permitted by law, in no event shall we be liable for any
+        indirect, incidental, consequential, special, or punitive damages, or any loss of
+        profits or data, arising out of or in connection with your use of the App.
+      </p>
+      <p>
+        Our total aggregate liability for any claims arising out of or relating to the App
+        or these Terms shall be limited to the amount you paid (if any) for using the App
+        during the twelve (12) months prior to the event giving rise to the claim,
+        or the minimum amount permitted by applicable law.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>12. Indemnity</h2>
+      <p>
+        You agree to indemnify and hold us harmless from and against any claims, liabilities,
+        damages, losses, and expenses (including reasonable legal fees) arising out of or
+        related to:
+      </p>
+      <ul>
+        <li>Your use or misuse of the App.</li>
+        <li>Your violation of these Terms.</li>
+        <li>Your violation of any applicable law or regulation.</li>
+      </ul>
+
+      <hr class="section-divider" />
+
+      <h2>13. Termination</h2>
+      <p>
+        You may stop using the App and uninstall it from your device at any time.
+      </p>
+      <p>
+        We may suspend or terminate your access to the App (or certain features) at any time,
+        with or without notice, if we reasonably believe:
+      </p>
+      <ul>
+        <li>You have violated these Terms.</li>
+        <li>Your use poses a risk to us, the App, or other users.</li>
+        <li>We are required to do so by law or by a third-party partner (such as the app store).</li>
+      </ul>
+      <p>
+        Upon termination, the rights and licences granted to you under these Terms will
+        immediately cease. Sections that by their nature should survive termination
+        (including but not limited to intellectual property, warranty disclaimer,
+        limitation of liability, and indemnity) shall continue to apply.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>14. Changes to the App &amp; These Terms</h2>
+      <p>
+        We may update the App and these Terms from time to time, for example to:
+      </p>
+      <ul>
+        <li>Introduce new features or improve performance.</li>
+        <li>Comply with changes in law or app store policies.</li>
+        <li>Address security, usability, or technical issues.</li>
+      </ul>
+      <p>
+        When we make material changes to these Terms, we will update the “Last updated”
+        date at the top of this page and may provide additional notice within the App
+        where appropriate. Your continued use of the App after changes become effective
+        constitutes acceptance of the updated Terms.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>15. Governing Law</h2>
+      <p>
+        These Terms and your use of the App are governed by the laws of England and Wales,
+        without regard to its conflict of law principles, unless the laws of your country
+        of residence require otherwise.
+      </p>
+      <p>
+        Any disputes arising out of or relating to these Terms or the App shall be subject
+        to the exclusive jurisdiction of the courts of England and Wales, unless applicable
+        law does not permit this.
+      </p>
+
+      <hr class="section-divider" />
+
+      <h2>16. Contact Us</h2>
+      <p>
+        If you have any questions or concerns about these Terms or the App, you can contact us at:
+      </p>
+      <div class="contact-block">
+        <p><strong>Support</strong></p>
+        <p>Email: <a href="mailto:hello@tigerstorm.dev">hello@tigerstorm.dev</a></p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>© <span id="year"></span> TIGERSTORM LIMITED. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // keep year up to date
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+    (function () {
+      const toggle = document.querySelector('.nav-toggle');
+      const drawer = document.querySelector('[data-nav-drawer]');
+      const backdrop = document.querySelector('[data-nav-backdrop]');
+
+      if (!toggle || !drawer || !backdrop) return;
+
+      const iconEl = toggle.querySelector('.nav-icon');
+
+      function setOpen(isOpen) {
+        drawer.classList.toggle('is-open', isOpen);
+        backdrop.classList.toggle('is-open', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        if (iconEl) {
+          iconEl.textContent = isOpen ? 'close' : 'menu';
+        }
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = !drawer.classList.contains('is-open');
+        setOpen(isOpen);
+      });
+
+      backdrop.addEventListener('click', () => setOpen(false));
+
+      drawer.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target instanceof Element && target.tagName === 'A') {
+          setOpen(false);
+        }
+      });
+
+      // Close on ESC
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          setOpen(false);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
