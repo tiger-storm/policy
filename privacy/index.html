@@ -57,7 +57,7 @@
 
     /* Header / Nav */
 
-    .site-header {
+     .site-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -93,12 +93,12 @@
       border-right-color: transparent;
       transform: rotate(-30deg);
     }
-    
+
     .logo-icon {
       font-family: "Material Symbols Rounded";
       font-variation-settings:
         'FILL' 0,
-        'wght' 100,
+        'wght' 400,
         'GRAD' 0,
         'opsz' 48;
       font-size: 36px;
@@ -110,14 +110,7 @@
       justify-content: center;
     }
 
-    .material-symbols-outlined {
-      font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 48;
-    }
-
+    
     .brand span {
       font-weight: 400;
     }
@@ -442,21 +435,19 @@
 </head>
 <body>
   <div class="page">
-    <!-- Top navigation -->
+     <!-- Top navigation -->
     <header class="site-header">
       <div class="brand">
-		<span class="logo-icon">
-          <span class="material-symbols-outlined">bolt</span>
-        </span>
+        <span class="logo-icon">bolt</span>
         <span>Now Launcher</span>
       </div>
 
       <nav class="nav" aria-label="Primary navigation">
         <!-- Desktop links -->
         <div class="nav-links" aria-hidden="false">
-          <a href="/" class="is-active">Home</a>
+          <a href="/">Home</a>
           <a href="/features">Features</a>
-          <a href="/privacy">Privacy</a>
+          <a href="/privacy" class="is-active">Privacy</a>
           <a href="/terms">Terms of Service</a>
         </div>
 
