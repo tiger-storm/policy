@@ -26,6 +26,8 @@
       --text-muted: #6b7280;
       --border-subtle: #e5e7eb;
       --content-width: 1120px;
+      --nav-drawer-bg: #ffffff;
+      --nav-drawer-shadow: 0 18px 45px rgba(15, 23, 42, 0.3);
     }
 
     * {
@@ -57,7 +59,7 @@
 
     /* Header / Nav */
 
-     .site-header {
+    .site-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -110,12 +112,27 @@
       justify-content: center;
     }
 
-    
+    .nav-icon {
+      font-family: "Material Symbols Rounded";
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48;
+      font-size: 22px;
+      color: #111;
+      border-radius: 50%;
+      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }  
+
     .brand span {
       font-weight: 400;
     }
 
-     /* NAVIGATION */
+    /* NAVIGATION */
     .nav {
       display: flex;
       align-items: center;
@@ -165,16 +182,11 @@
     .nav-toggle {
       display: none;
       border: none;
-      background: rgba(17, 17, 17, 0.06);
-      border-radius: 999px;
+      background: transparent;
       padding: 6px 10px;
       cursor: pointer;
       align-items: center;
       justify-content: center;
-    }
-
-    .nav-toggle .material-symbols-outlined {
-      font-size: 22px;
     }
 
     .nav-backdrop {
@@ -250,6 +262,11 @@
 
       .nav-toggle {
         display: inline-flex;
+      }
+
+      /* Ensure the drawer stays visible on mobile */
+      .nav-links--drawer {
+        display: flex;
       }
     }
 
@@ -418,10 +435,6 @@
         gap: 16px;
       }
 
-      .nav {
-        display: none;
-      }
-
       .policy-wrapper {
         padding: 22px 18px 26px;
       }
@@ -435,7 +448,7 @@
 </head>
 <body>
   <div class="page">
-     <!-- Top navigation -->
+    <!-- Top navigation -->
     <header class="site-header">
       <div class="brand">
         <span class="logo-icon">bolt</span>
@@ -453,8 +466,7 @@
 
         <!-- Hamburger button (shown on small screens) -->
         <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
-        <div class="brand">
-         	 <span class="logo-icon">menu</span></div>
+          <span class="nav-icon">menu</span>
         </button>
       </nav>
     </header>
@@ -462,9 +474,9 @@
     <!-- Mobile drawer + backdrop -->
     <div class="nav-backdrop" data-nav-backdrop></div>
     <div class="nav-links nav-links--drawer" data-nav-drawer>
-      <a href="/" class="is-active">Home</a>
+      <a href="/">Home</a>
       <a href="/features">Features</a>
-      <a href="/privacy">Privacy</a>
+      <a href="/privacy" class="is-active">Privacy</a>
       <a href="/terms">Terms of Service</a>
     </div>
 
@@ -475,14 +487,14 @@
         <h1 class="hero-title">
           <span>Privacy Policy</span><br />
         </h1>
-		<a
+        <a
           href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
           class="play-badge-link">
-        	<img
-	            src="/assets/play_badge.svg"
-	            alt="Get it on Google Play"
-	            class="play-badge"
-          	/>
+          <img
+            src="/assets/play_badge.svg"
+            alt="Get it on Google Play"
+            class="play-badge"
+          />
         </a>
       </div>
     </section>
@@ -690,9 +702,10 @@
   </div>
 
   <!-- Footer -->
+  
   <footer class="site-footer">
     <div class="footer-inner">
-      <div>© <span id="year"></span> Now Launcher. All rights reserved.</div>
+      <div>© <span id="year"></span> TIGERSTORM LIMITED. All rights reserved.</div>
       <div class="footer-links">
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>
@@ -703,6 +716,48 @@
   <script>
     // keep year up to date
     document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+    (function () {
+      const toggle = document.querySelector('.nav-toggle');
+      const drawer = document.querySelector('[data-nav-drawer]');
+      const backdrop = document.querySelector('[data-nav-backdrop]');
+
+      if (!toggle || !drawer || !backdrop) return;
+
+      const iconEl = toggle.querySelector('.nav-icon');
+
+      function setOpen(isOpen) {
+        drawer.classList.toggle('is-open', isOpen);
+        backdrop.classList.toggle('is-open', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        if (iconEl) {
+          iconEl.textContent = isOpen ? 'close' : 'menu';
+        }
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = !drawer.classList.contains('is-open');
+        setOpen(isOpen);
+      });
+
+      backdrop.addEventListener('click', () => setOpen(false));
+
+      drawer.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target instanceof Element && target.tagName === 'A') {
+          setOpen(false);
+        }
+      });
+
+      // Close on ESC
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          setOpen(false);
+        }
+      });
+    })();
   </script>
 </body>
 </html>
