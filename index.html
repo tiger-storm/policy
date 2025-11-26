@@ -322,7 +322,8 @@
     }
 
     /* DEVICE MOCKUP + ANGLED PHONE */
-    .hero-cards {
+    .hero-cards {    
+
       flex: 1 1 320px;
       display: flex;
       justify-content: center;
@@ -334,7 +335,7 @@
       width: 100%;
       margin: 0rem auto 5rem auto; /* More breathing room */
       aspect-ratio: 1344 / 2992;
-      max-width: clamp(260px, 40vw, 360px); /* NEW: caps size on large screens */
+      max-width: clamp(260px, 28vw, 280px); /* NEW: caps size on large screens */
     }
     
     @media (min-width: 1200px) {
@@ -374,6 +375,7 @@
     }
 
     .device-screen {
+
       border-radius: 26px;
       overflow: hidden;
       background: #000;
@@ -462,8 +464,7 @@
       }
 
       .device-mockup {
-        max-width: 360px;
-        aspect-ratio: 9 / 19;
+        max-width: 260px;
       }
 
       .device-shell--back {
@@ -596,7 +597,7 @@
       </div>
     </section>
 
-     <footer class="site-footer">
+  <footer class="site-footer">
     <div class="footer-inner">
       <div>© <span id="year"></span> TIGERSTORM LIMITED. All rights reserved.</div>
       <div class="footer-links">
