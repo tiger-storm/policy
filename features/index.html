@@ -391,6 +391,23 @@
     .feature-list-count {
       opacity: 0.85;
     }
+    
+    .chip-background {
+      display: flex;
+      justify-content: flex-start; /* left-align horizontally */
+      align-items: center;         /* center vertically */
+      margin-top:  8px;
+    }
+
+    
+    .chip-pro {
+      background: #000;
+      color: #fff;
+      padding: 2px 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
 
     /* Mobile: list becomes horizontal row at bottom */
 
@@ -506,6 +523,7 @@
               <div class="feature-list-content">
                 <div>
                   <div class="feature-list-title">Smart Suggestions</div>
+                   <div class="chip-background"> <div class="chip-pro">PREMIUM</div></div>
                   <p class="feature-list-description">
 					See what you need, when you need it. Giving you timely, relevant actions based on today and what’s coming up next.
                   </p>
@@ -541,6 +559,7 @@
               <div class="feature-list-content">
                 <div>
                   <div class="feature-list-title">Quick Settings</div>
+                 
                   <p class="feature-list-description">
                   Instant access to the settings you use most—right from your homescreen.
                   </p>
