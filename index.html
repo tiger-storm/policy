@@ -316,10 +316,16 @@
     .device-mockup {
       position: relative;
       width: 100%;
-      max-width: 440px;
-      margin: 5rem auto; /* More breathing room */
+      margin: 0rem auto 5rem auto; /* More breathing room */
       aspect-ratio: 1344 / 2992;
+      max-width: clamp(260px, 40vw, 360px); /* NEW: caps size on large screens */
     }
+    
+    @media (min-width: 1200px) {
+  .hero-cards {
+    justify-content: flex-end;
+  }
+}
 
     .device-shell {
       border-radius: 32px;
@@ -517,6 +523,7 @@
     <div class="nav-backdrop" data-nav-backdrop></div>
     <div class="nav-links nav-links--drawer" data-nav-drawer>
       <a href="/" class="is-active">Home</a>
+      <a href="/features">Features</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms of Service</a>
     </div>
