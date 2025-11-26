@@ -170,7 +170,8 @@
         height: 100%;
         display: flex;
         flex-direction: column;
-        padding-bottom: 0.5rem;
+        /* padding-bottom: 0.5rem; */
+		padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
       }
       .feature-section {
         height: 100%;
@@ -400,8 +401,7 @@
         overflow-y: hidden;
         padding-left: 2rem;
         padding-right: 0;
-        /* padding-bottom: 0.5rem; */
-		padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+        padding-bottom: 0.5rem;
         margin-top: 0;
         align-items: stretch;
       }
