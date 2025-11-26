@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy - Now Launcher</title>
+  <title>Privacy Policy</title>
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -167,6 +168,64 @@
       align-items: center;
       font-size: 14px;
     }
+
+	
+    .nav-toggle {
+      display: none;
+      border: none;
+      background: rgba(17, 17, 17, 0.06);
+      border-radius: 999px;
+      padding: 6px 10px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-toggle .material-symbols-outlined {
+      font-size: 22px;
+    }
+
+    .nav-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease-out;
+      z-index: 20;
+    }
+
+    .nav-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-links--drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: 260px;
+      background: var(--nav-drawer-bg);
+      box-shadow: var(--nav-drawer-shadow);
+      padding: 4.5rem 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      transform: translateX(100%);
+      transition: transform 0.2s ease-out;
+      z-index: 30;
+      font-size: 0.95rem;
+    }
+
+    .nav-links--drawer.is-open {
+      transform: translateX(0);
+    }
+
+    .nav-links--drawer a {
+      padding: 0.25rem 0;
+    }
+  
 
     .play-badge-link {
       display: inline-block;
@@ -386,25 +445,31 @@
         <span>Now Launcher</span>
       </div>
 
-      <nav class="nav">
-        <a href="/">Home</a>
-        <a href="/privacy" class="is-active">Privacy</a>
-        <a href="/terms">Terms of Service</a>
-      </nav>
+      <nav class="nav" aria-label="Primary navigation">
+        <!-- Desktop links -->
+        <div class="nav-links" aria-hidden="false">
+          <a href="/" class="is-active">Home</a>
+          <a href="/features">Features</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms of Service</a>
+        </div>
 
-      <!-- <div class="header-cta">
-        <a
-          href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
-          class="play-badge-link"
-        >
-          <img
-            src="/assets/play_badge.svg"
-            alt="Get it on Google Play"
-            class="play-badge"
-          />
-        </a>
-      </div> -->
+        <!-- Hamburger button (shown on small screens) -->
+        <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <div class="brand">
+         	 <span class="logo-icon">menu</span></div>
+        </button>
+      </nav>
     </header>
+
+    <!-- Mobile drawer + backdrop -->
+    <div class="nav-backdrop" data-nav-backdrop></div>
+    <div class="nav-links nav-links--drawer" data-nav-drawer>
+      <a href="/" class="is-active">Home</a>
+      <a href="/features">Features</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms of Service</a>
+    </div>
 
     <!-- Hero section -->
     <section class="hero">
