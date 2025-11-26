@@ -109,6 +109,22 @@
       align-items: center;
       justify-content: center;
     }
+    
+    .nav-icon {
+      font-family: "Material Symbols Rounded";
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48;
+      font-size: 22px;
+      color: #111;
+      border-radius: 50%;
+      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     
     .brand span {
@@ -165,8 +181,7 @@
     .nav-toggle {
       display: none;
       border: none;
-      background: rgba(17, 17, 17, 0.06);
-      border-radius: 999px;
+      background: transparent;
       padding: 6px 10px;
       cursor: pointer;
       align-items: center;
@@ -391,33 +406,35 @@
       filter: saturate(1.08) brightness(1.04);
     }
 
-    /* FOOTER */
-    footer {
+     .site-footer {
       border-top: 1px solid var(--border-subtle);
-      padding: 2rem 1.5rem 0rem;
-      font-size: 0.8rem;
+      padding: 16px 20px 20px;
+      font-size: 12px;
       color: var(--text-muted);
     }
 
     .footer-inner {
-      max-width: var(--container-width);
+      max-width: var(--content-width);
       margin: 0 auto;
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
       justify-content: space-between;
-      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .footer-links {
       display: flex;
-      gap: 1.25rem;
+      gap: 16px;
     }
 
     .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
       text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-thickness: 1px;
     }
 
     /* RESPONSIVE */
@@ -516,7 +533,7 @@
         <!-- Hamburger button (shown on small screens) -->
         <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
         <div class="brand">
-         	 <span class="logo-icon">menu</span></div>
+         	 <span class="nav-icon">menu</span></div>
         </button>
       </nav>
     </header>
@@ -579,16 +596,21 @@
       </div>
     </section>
 
-    <footer>
-      <div class="footer-inner">
-        <div>&copy; TIGERSTORM LIMITED — 2025</div>
-        <div class="footer-links">
-          <a href="privacy/">Privacy Policy</a>
-          <a href="terms/">Terms of Service</a>
-        </div>
+     <footer class="site-footer">
+    <div class="footer-inner">
+      <div>© <span id="year"></span> TIGERSTORM LIMITED. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
       </div>
-    </footer>
+    </div>
+  </footer>
   </div>
+  
+  <script>
+    // keep year up to date
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
   <script>
     (function () {
