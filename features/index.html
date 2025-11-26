@@ -400,7 +400,8 @@
         overflow-y: hidden;
         padding-left: 2rem;
         padding-right: 0;
-        padding-bottom: 0.5rem;
+        /* padding-bottom: 0.5rem; */
+		padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
         margin-top: 0;
         align-items: stretch;
       }
@@ -483,6 +484,19 @@
 
         <!-- Right side feature list -->
         <aside class="feature-list" aria-label="Now Launcher features">
+			<div class="header-cta">
+          <a
+            href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
+            class="play-badge-link"
+          >
+            <img
+
+              src="/assets/play_badge.svg"
+              alt="Get it on Google Play"
+              class="play-badge"
+            />
+          </a>
+        </div>
           <button
             class="feature-list-item is-active"
             type="button"
