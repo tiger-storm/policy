@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Account</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 45%, #000 100%);
+      color: #e5e7eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 1.25rem;
+      padding: 2rem 1.75rem;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      backdrop-filter: blur(24px);
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.4rem;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: #9ca3af;
+      margin-bottom: 1.2rem;
+    }
+    #status {
+      margin: 0.75rem 0 0.5rem;
+      font-size: 0.85rem;
+      white-space: pre-line;
+      color: #e5e7eb;
+    }
+    .user-row {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .user-row span.label {
+      color: #9ca3af;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      font-size: 0.8rem;
+      color: #e5e7eb;
+      gap: 0.35rem;
+    }
+    .chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+    .buttons {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    button {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease,
+        border-color 0.12s ease, opacity 0.12s ease;
+    }
+    button:active {
+      transform: scale(0.97);
+    }
+    #loginBtn {
+      background: #020617;
+      color: #e5e7eb;
+      border: 1px solid #4b5563;
+      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.7);
+    }
+    #loginBtn:hover {
+      background: #111827;
+      border-color: #6b7280;
+    }
+    #deleteBtn {
+      background: #b91c1c;
+      color: #f9fafb;
+      box-shadow: 0 14px 35px rgba(185, 28, 28, 0.5);
+    }
+    #deleteBtn:hover {
+      background: #dc2626;
+    }
+    button[disabled] {
+      opacity: 0.6;
+      cursor: default;
+      box-shadow: none;
+      transform: none;
+    }
+    small {
+      font-size: 0.78rem;
+      color: #9ca3af;
+      display: block;
+      margin-top: 1.1rem;
+      line-height: 1.4;
+    }
+    .brand {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.75rem;
+    }
+  </style>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signInWithPopup,
+      GoogleAuthProvider,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+
+    // TODO: Replace with YOUR 
+    const firebaseConfig = {
+      apiKey: "AIzaSyCG1diiAghPAe4UnqDwC4uAl6bvC07BxVE",
+      authDomain: "now-launcher.firebaseapp.com",
+      projectId: "now-launcher",
+      appId: "1:774081661971:web:c8e8ef5ff095fb0d6143e6",
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const provider = new GoogleAuthProvider();
+
+      const statusEl = document.getElementById("status");
+      const loginBtn = document.getElementById("loginBtn");
+      const deleteBtn = document.getElementById("deleteBtn");
+      const userInfoEl = document.getElementById("userInfo");
+      const chipDot = document.querySelector(".chip-dot");
+      const chipLabel = document.getElementById("chipLabel");
+
+      function setStatus(text) {
+        statusEl.textContent = text;
+      }
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const email = user.email || "(no email)";
+          userInfoEl.textContent = email;
+          setStatus("You’re signed in. You can delete your account below.");
+          loginBtn.style.display = "none";
+          deleteBtn.style.display = "inline-flex";
+          chipDot.style.background = "#22c55e";
+          chipLabel.textContent = "Signed in";
+        } else {
+          userInfoEl.textContent = "Not signed in";
+          setStatus("Sign in with the same Google account you use in Now Launcher.");
+          loginBtn.style.display = "inline-flex";
+          deleteBtn.style.display = "none";
+          chipDot.style.background = "#f97316";
+          chipLabel.textContent = "Action required";
+        }
+      });
+
+      loginBtn.addEventListener("click", async () => {
+        setStatus("Opening Google sign-in…");
+        loginBtn.disabled = true;
+        try {
+          await signInWithPopup(auth, provider);
+        } catch (e) {
+          console.error(e);
+          setStatus("Error signing in: " + (e?.message || e));
+        } finally {
+          loginBtn.disabled = false;
+        }
+      });
+
+      deleteBtn.addEventListener("click", async () => {
+        const user = auth.currentUser;
+        if (!user) {
+          setStatus("No user signed in. Please sign in again.");
+          return;
+        }
+
+        const confirmed = confirm(
+          "This will permanently delete your Now Launcher account linked to this Google account. This cannot be undone.\n\nContinue?"
+        );
+        if (!confirmed) return;
+
+        deleteBtn.disabled = true;
+        setStatus("Deleting your account…");
+
+        try {
+          await user.delete();
+          setStatus("Your account has been deleted. You can now close this page.");
+          userInfoEl.textContent = "Deleted";
+          deleteBtn.style.display = "none";
+          chipDot.style.background = "#6b7280";
+          chipLabel.textContent = "Deleted";
+        } catch (e) {
+          console.error(e);
+          setStatus(
+            "Error deleting account: " +
+            (e?.message || e) +
+            "\nIf you see 'requires recent login', sign out, sign in again, then retry."
+          );
+          deleteBtn.disabled = false;
+          // optional: force reauth by signing out
+          try { await signOut(auth); } catch (_) {}
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="card">
+    <h1>Delete your Now Launcher account</h1>
+    <p class="subtitle">
+      Use this page to permanently delete the account linked to your Google sign-in.
+    </p>
+
+    <div class="user-row">
+      <span class="label">Account:</span>
+      <span id="userInfo">Checking…</span>
+    </div>
+
+    <div class="chip">
+      <span class="chip-dot"></span>
+      <span id="chipLabel">Checking status…</span>
+    </div>
+
+    <div id="status">Loading…</div>
+
+    <div class="buttons">
+      <button id="loginBtn" style="display:none;">Sign in with Google</button>
+      <button id="deleteBtn" style="display:none;">Delete my account</button>
+    </div>
+
+    <small>
+      Deleting your account removes your Firebase authentication record and associated app data,
+      as described in our Privacy Policy. This cannot be undone.
+    </small>
+
+    <div class="brand">
+      Now Launcher · home.tigerstorm.dev
+    </div>
+  </div>
+</body>
+</html>
