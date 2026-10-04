@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,wght@0,400;1,700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" />
@@ -77,7 +77,11 @@
       white-space: nowrap;
     }
 
+    .brand-now { color: #343434; font-weight: 700; font-style: italic; }
+    .brand-launcher { color: #787878; font-weight: 400; font-style: normal; }
+
     .logo-icon {
+      color: #585252;
       font-family: "Material Symbols Rounded";
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
       font-size: 1em;
@@ -206,6 +210,8 @@
     .reading-page ul { padding-left: 22px; margin: 0 0 20px; }
     .reading-page li { margin-bottom: 12px; }
     .article-body section { border-top: 1px solid #dedee2; margin-top: 32px; padding-top: 32px; }
+    .introduction-media { display: block; margin-top: 32px; }
+    .introduction-media img { display: block; width: 100%; height: auto; border-radius: 16px; }
     .section-divider { border: 0; border-top: 1px solid #dedee2; margin: 32px 0; }
     .policy-meta { font-size: 14px; }
     .contact-block { margin-top: 20px; }
@@ -231,15 +237,15 @@
       <div class="sidebar-content">
         <a class="brand" href="/" aria-label="Now Launcher home">
           <span class="logo-icon" aria-hidden="true">bolt</span>
-          <span>Now Launcher</span>
+          <span><span class="brand-now">Now</span> <span class="brand-launcher">Launcher</span></span>
         </a>
         <button class="nav-toggle" type="button" aria-controls="primary-links" aria-expanded="false" aria-label="Open navigation"><span class="nav-icon" aria-hidden="true">menu</span></button>
         <nav class="nav" aria-label="Primary navigation">
           <div class="nav-links" id="primary-links">
             <a href="/">Home</a>
-            <a href="https://home.tigerstorm.dev/introduction/" aria-current="page">Introduction</a>
+            <a href="/introduction" aria-current="page">Introduction</a>
             <a href="/features">Features</a>
-            <span class="nav-placeholder" aria-disabled="true" title="Roadmap URL to follow">Roadmap</span>
+            <a href="/roadmap">Roadmap</a>
             <a href="/privacy">Privacy</a>
             <a href="/terms">Terms of Service</a>
           </div>
@@ -294,6 +300,10 @@
             <p>Now Launcher brings these ideas together around a simple ambition: spend less time finding your way around your phone. Relevant suggestions give you a useful starting point. One panel reduces the places you need to look. A clean interface and responsive motion help you move through it comfortably.</p>
             <p>That is why I created Now: to make the moment between knowing what you want and getting to it a little shorter, every time you pick up your phone.</p>
           </section>
+          <picture class="introduction-media">
+            <source media="(max-width: 900px)" srcset="/assets/introduction/media_portrait.png" />
+            <img src="/assets/introduction/media_landscape.png" alt="Now Launcher home screen preview" loading="lazy" decoding="async" />
+          </picture>
         </div>
 
         <footer class="article-footer">
