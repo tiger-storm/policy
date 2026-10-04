@@ -125,17 +125,20 @@
     .hero-title {
       font-family: "Google Sans", system-ui, sans-serif;
       font-size: clamp(22px, 8.9cqi, 60px);
-      font-weight: 400;
+      font-weight: normal;
+      font-synthesis: none;
       line-height: 1.25;
       letter-spacing: -0.025em;
       color: #333333;
+      text-align: left;
       margin-bottom: 24px;
     }
     .hero-title-row { display: block; white-space: nowrap; }
-    .hero-title-secondary { color: #7b7b7b; text-align: center; }
+    .hero-title-secondary { color: #7b7b7b; }
     .title-icon {
       font-family: "Material Symbols Rounded";
-      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+      font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 48;
+      font-weight: 300;
       display: inline-block;
       font-size: 0.8em;
       line-height: 1;
@@ -271,7 +274,7 @@
         padding: 48px clamp(24px, 6vw, 48px) 24px;
       }
       .hero-text { grid-column: 1; grid-row: 1; width: 100%; max-width: 540px; justify-self: center; }
-      .hero-title { margin-bottom: 20px; }
+      .hero-title { margin-bottom: 20px; text-align: center; }
       .hero-body { font-size: 16px; max-width: 46ch; margin-bottom: 24px; }
       .hero-cards { grid-row: 2; max-width: 340px; width: calc(100% - 24px); }
       .site-copyright { order: 3; margin: 0; padding: 20px 24px 28px; text-align: center; }
@@ -311,7 +314,7 @@
       <section class="hero" id="overview" aria-labelledby="hero-heading">
         <div class="hero-text">
           <h1 class="hero-title" id="hero-heading"><span class="hero-title-row">The right information,</span> <span class="hero-title-row hero-title-secondary">at the right time <span class="title-icon" aria-hidden="true">bolt</span></span></h1>
-          <p class="hero-body">Now Launcher surfaces the apps, actions and information that matter when they're relevant — keeping your home screen focused on what you need now.</p>
+          <p class="hero-body">See the apps and suggestions that matter, when they’re most useful.</p>
           <a href="https://play.google.com/store/apps/details?id=com.tigerstorm.home" class="play-badge-link">
             <img src="/assets/play_badge.svg" alt="Get it on Google Play" class="play-badge" />
           </a>
