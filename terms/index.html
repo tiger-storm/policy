@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,wght@0,400;1,700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" />
@@ -76,7 +76,11 @@
       white-space: nowrap;
     }
 
+    .brand-now { color: #343434; font-weight: 700; font-style: italic; }
+    .brand-launcher { color: #787878; font-weight: 400; font-style: normal; }
+
     .logo-icon {
+      color: #585252;
       font-family: "Material Symbols Rounded";
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
       font-size: 1em;
@@ -230,7 +234,7 @@
       <div class="sidebar-content">
         <a class="brand" href="/" aria-label="Now Launcher home">
           <span class="logo-icon" aria-hidden="true">bolt</span>
-          <span>Now Launcher</span>
+          <span><span class="brand-now">Now</span> <span class="brand-launcher">Launcher</span></span>
         </a>
         <button class="nav-toggle" type="button" aria-controls="primary-links" aria-expanded="false" aria-label="Open navigation"><span class="nav-icon" aria-hidden="true">menu</span></button>
         <nav class="nav" aria-label="Primary navigation">
