@@ -212,6 +212,7 @@
     .article-body section { border-top: 1px solid #dedee2; margin-top: 32px; padding-top: 32px; }
     .introduction-media { display: block; margin-top: 32px; }
     .introduction-media img { display: block; width: 100%; height: auto; border-radius: 16px; }
+    .introduction-media + p { margin-top: 32px; }
     .section-divider { border: 0; border-top: 1px solid #dedee2; margin: 32px 0; }
     .policy-meta { font-size: 14px; }
     .contact-block { margin-top: 20px; }
@@ -269,6 +270,10 @@
           <section aria-labelledby="suggestions-heading">
             <h2 id="suggestions-heading">From apps to relevant suggestions</h2>
             <p>A traditional home screen starts with the apps you have installed. You arrange them into a grid, put some into folders, add a few widgets, and learn where everything lives. Over time, using your phone becomes partly an exercise in remembering that arrangement.</p>
+            <picture class="introduction-media">
+              <source media="(max-width: 900px)" srcset="/assets/introduction/old_media_portrait.png" />
+              <img src="/assets/introduction/old_media_landscape.png" alt="Traditional home screens with apps arranged in grids, folders, and widgets" loading="lazy" decoding="async" />
+            </picture>
             <p>The starting point for Now was a different question: what would be useful right now?</p>
             <p>That question shifts the emphasis from showing a collection of apps to surfacing relevant suggestions. An app is still useful, but its place on the screen should reflect when you might need it. The same thinking applies to information: an upcoming event can be more useful than the calendar icon that leads to it.</p>
             <p>The aim is to make the next step easier to spot. You should be able to open your home screen, recognise something useful, and act on it without first translating what you want into a place to look.</p>
