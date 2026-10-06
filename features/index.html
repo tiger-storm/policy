@@ -323,7 +323,6 @@
         .feature-preview-phone-shell {
             position: relative;
             width: min(300px, calc((100svh - 144px) * 0.4615), 100%);
-            aspect-ratio: 9 / 19.5;
             border-radius: 2rem;
             background: #050509;
             overflow: hidden;
@@ -334,11 +333,11 @@
         .feature-preview-inner-frame {
             position: relative;
             width: 100%;
-            height: 100%;
+            aspect-ratio: 1344 / 2992;
             border-radius: 1.6rem;
             overflow: hidden;
             background: #000;
-            border: 1px solid rgba(148, 163, 184, 0.5);
+            box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.5) inset;
         }
 
         .feature-preview-image {
@@ -556,8 +555,8 @@
                                         class="feature-preview-image is-active" data-feature-id="smart" />
                                     <img src="/assets/features/expanded.png" alt="Focus Mode"
                                         class="feature-preview-image" data-feature-id="focus" />
-                                    <img src="/assets/features/search.png" alt="Search"
-                                        class="feature-preview-image" data-feature-id="search" />
+                                    <img src="/assets/features/search.png" alt="Search" class="feature-preview-image"
+                                        data-feature-id="search" />
                                     <img src="/assets/features/all_applications.png" alt="Applications"
                                         class="feature-preview-image" data-feature-id="apps" />
                                     <img src="/assets/features/free.png" alt="Applications"
@@ -605,7 +604,7 @@
                                     <div>
                                         <div class="feature-list-title">Smart Suggestions</div>
                                         <div class="chip-background">
-                                            <div class="chip-pro">PREMIUM</div>
+                                            <div class="chip-pro">PRO</div>
                                         </div>
                                         <p class="feature-list-description">
                                             See what you need, when you need it. Giving you timely, relevant actions
@@ -624,6 +623,9 @@
                                 <div class="feature-list-content">
                                     <div>
                                         <div class="feature-list-title">Keep Your Focus</div>
+                                        <div class="chip-background">
+                                            <div class="chip-pro">PRO</div>
+                                        </div>
                                         <p class="feature-list-description">
                                             Your suggestions stay minimized to keep your homescreen clear, expand them
                                             anytime when you need more.
@@ -639,6 +641,9 @@
                                 <div class="feature-list-content">
                                     <div>
                                         <div class="feature-list-title">Search</div>
+                                        <div class="chip-background">
+                                            <div class="chip-pro">PRO</div>
+                                        </div>
                                         <p class="feature-list-description">
                                             Search that understands context: from apps and contacts to addresses, phone
                                             details, and instant calculations.
@@ -670,6 +675,9 @@
                                 <div class="feature-list-content">
                                     <div>
                                         <div class="feature-list-title">Customisation</div>
+                                        <div class="chip-background">
+                                            <div class="chip-pro">PRO</div>
+                                        </div>
                                         <p class="feature-list-description">
                                             Your launcher is yours, adjust it exactly how you want.
 
@@ -694,7 +702,7 @@
                             </div>
                         </button>
 
-                         <button class="feature-list-item" type="button" data-feature-target="apps" aria-pressed="false">
+                        <button class="feature-list-item" type="button" data-feature-target="apps" aria-pressed="false">
                             <div class="feature-list-aspect">
                                 <div class="feature-list-content">
                                     <div>
@@ -713,6 +721,9 @@
                                 <div class="feature-list-content">
                                     <div>
                                         <div class="feature-list-title">Permissions</div>
+                                        <div class="chip-background">
+                                            <div class="chip-pro">PRO</div>
+                                        </div>
                                         <p class="feature-list-description">
                                             Adjust your permissions and your security as you require.
                                         </p>
